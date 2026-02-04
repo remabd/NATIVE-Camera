@@ -42,17 +42,17 @@ export default function PictureGallery() {
 
     return (
         <FlatList
+            style={style.gallery}
             renderItem={({ item, index }) => <PictureIcon uri={item.uri} />}
             data={pictures}
             keyExtractor={item => item.uri}
+            numColumns={4}
         />
     )
 }
 
 const style = StyleSheet.create({
-    Gallery: {
+    gallery: {
         flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
     }
 })
