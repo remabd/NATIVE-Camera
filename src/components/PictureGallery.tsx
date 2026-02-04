@@ -1,4 +1,4 @@
-import { FlatList, Image } from "react-native"
+import { FlatList, Image, StyleSheet } from "react-native"
 import { useSelector } from "react-redux"
 import { pictureSelector } from "../store/pictureSlice"
 import PictureIcon from "./PictureIcon";
@@ -7,31 +7,31 @@ export default function PictureGallery() {
     // const pictures =  useSelector(pictureSelector);
     const pictures = [
         {
-            uri: "1",
+            uri: "dragons.jpg",
             width: 400,
             height: 600,
             format: 'jpg',
         },
         {
-            uri: "2",
+            uri: "drago.jpg",
             width: 400,
             height: 600,
             format: 'jpg',
         },
         {
-            uri: "3",
+            uri: "drag.jpg",
             width: 400,
             height: 600,
             format: 'jpg',
         },
         {
-            uri: "4",
+            uri: "dra.jpg",
             width: 400,
             height: 600,
             format: 'jpg',
         },
         {
-            uri: "5",
+            uri: "dr.jpg",
             width: 400,
             height: 600,
             format: 'jpg',
@@ -48,3 +48,11 @@ export default function PictureGallery() {
         />
     )
 }
+
+const style = StyleSheet.create({
+    Gallery: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    }
+})
