@@ -6,6 +6,7 @@ import { store } from './src/store/store';
 
 import Camera from './src/components/Camera';
 import PictureGallery from './src/components/PictureGallery';
+import FolderList from './src/components/FolderList';
 
 export default function App() {
     const Tab = createBottomTabNavigator();
@@ -16,6 +17,7 @@ export default function App() {
                 <Tab.Navigator>
                     <Tab.Screen name='camera' component={Camera} />
                     <Tab.Screen name='gallery' component={PictureGallery} />
+                    <Tab.Screen name='folder' component={FolderList} />
                 </Tab.Navigator>
             </NavigationContainer>
         </Provider>

@@ -2,13 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Picture from "../models/Picture";
 import { RootState } from "./store";
 
-// Define a type for the slice state
-interface CounterState {
+interface PictureState {
     value: Picture[]
 }
 
-// Define the initial state using that type
-const initialState: CounterState = {
+const initialState: PictureState = {
     value: [],
 }
 

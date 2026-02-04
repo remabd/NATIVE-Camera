@@ -1,7 +1,8 @@
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import Picture from "../models/Picture";
 
-export default function PictureIcon(props: { uri: string }) {
-    const uri = '' + props.uri;
+export default function PictureIcon(props: { picture:  Picture}) {
+    const uri = '' + props.picture.uri;
 
     return (
         <TouchableOpacity

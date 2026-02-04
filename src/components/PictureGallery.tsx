@@ -2,10 +2,11 @@ import { FlatList, Image, StyleSheet } from "react-native"
 import { useSelector } from "react-redux"
 import { pictureSelector } from "../store/pictureSlice"
 import PictureIcon from "./PictureIcon";
+import Picture from "../models/Picture";
 
 export default function PictureGallery() {
-    // const pictures =  useSelector(pictureSelector);
-    const pictures = [
+    // const pictures: Picture[] =  useSelector(pictureSelector);
+    const pictures: Picture[] = [
         {
             uri: "dragons.jpg",
             width: 400,
@@ -38,12 +39,10 @@ export default function PictureGallery() {
         }
     ];
 
-    console.log(pictures);
-
     return (
         <FlatList
             style={style.gallery}
-            renderItem={({ item, index }) => <PictureIcon uri={item.uri} />}
+            renderItem={({ item, index }) => <PictureIcon picture={item} />}
             data={pictures}
             keyExtractor={item => item.uri}
             numColumns={4}
