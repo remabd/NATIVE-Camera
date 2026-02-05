@@ -1,20 +1,13 @@
-import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
-import { useState, useRef } from "react";
-import {
-    Button,
-    Pressable,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from "react-native";
-import { useDispatch } from "react-redux";
-import { addPicture } from "../store/pictureSlice";
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { useState, useRef } from 'react';
+import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addPicture } from '../store/pictureSlice';
 
 export default function Camera() {
-    const [facing, setFacing] = useState<CameraType>("back");
+    const [facing, setFacing] = useState<CameraType>('back');
     const [permission, requestPermission] = useCameraPermissions();
-    const [uri, setUri] = useState("");
+    const [uri, setUri] = useState('');
     const dispatch = useDispatch();
     const ref = useRef<CameraView>(null);
 
@@ -25,9 +18,7 @@ export default function Camera() {
     if (!permission.granted) {
         return (
             <View style={styles.container}>
-                <Text style={styles.message}>
-                    We need your permission to show the camera
-                </Text>
+                <Text style={styles.message}>We need your permission to show the camera</Text>
                 <Button onPress={requestPermission} title="grant permission" />
             </View>
         );
@@ -42,7 +33,7 @@ export default function Camera() {
     }
 
     function toggleCameraFacing() {
-        setFacing((current) => (current === "back" ? "front" : "back"));
+        setFacing((current) => (current === 'back' ? 'front' : 'back'));
     }
 
     return (
@@ -66,7 +57,7 @@ export default function Camera() {
                                 style={[
                                     styles.shutterBtnInner,
                                     {
-                                        backgroundColor: "white",
+                                        backgroundColor: 'white',
                                     },
                                 ]}
                             />
@@ -81,51 +72,51 @@ export default function Camera() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: 'center',
     },
     message: {
-        textAlign: "center",
+        textAlign: 'center',
         paddingBottom: 10,
     },
     camera: {
         flex: 1,
     },
     buttonContainer: {
-        position: "absolute",
+        position: 'absolute',
         bottom: 64,
-        flexDirection: "row",
-        backgroundColor: "transparent",
-        width: "100%",
+        flexDirection: 'row',
+        backgroundColor: 'transparent',
+        width: '100%',
         paddingHorizontal: 64,
     },
     button: {
         flex: 1,
-        alignItems: "center",
+        alignItems: 'center',
     },
     text: {
         fontSize: 24,
-        fontWeight: "bold",
-        color: "white",
+        fontWeight: 'bold',
+        color: 'white',
     },
     shutterContainer: {
-        position: "absolute",
+        position: 'absolute',
         bottom: 44,
         left: 0,
-        width: "100%",
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "space-between",
+        width: '100%',
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         paddingHorizontal: 30,
     },
     shutterBtn: {
-        backgroundColor: "transparent",
+        backgroundColor: 'transparent',
         borderWidth: 5,
-        borderColor: "white",
+        borderColor: 'white',
         width: 85,
         height: 85,
         borderRadius: 45,
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     shutterBtnInner: {
         width: 70,

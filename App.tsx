@@ -7,21 +7,33 @@ import { store } from './src/store/store';
 import Camera from './src/components/Camera';
 import PictureGallery from './src/components/PictureGallery';
 import FolderList from './src/components/FolderList';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PictureDetails from './src/components/PictureDetails';
 
 export default function App() {
     const Tab = createBottomTabNavigator();
+    const Stack = createNativeStackNavigator();
+
+    function BottomNav() {
+        return (
+            <Tab.Navigator>
+                <Tab.Screen name="camera" component={Camera} />
+                <Tab.Screen name="gallery" component={PictureGallery} />
+                <Tab.Screen name="folder" component={FolderList} />
+            </Tab.Navigator>
+        );
+    }
 
     return (
         <Provider store={store}>
             <NavigationContainer>
-                <Tab.Navigator>
-                    <Tab.Screen name='camera' component={Camera} />
-                    <Tab.Screen name='gallery' component={PictureGallery} />
-                    <Tab.Screen name='folder' component={FolderList} />
-                </Tab.Navigator>
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Tabs" component={BottomNav} />
+                    <Stack.Screen name="Details" component={PictureDetails} />
+                </Stack.Navigator>
             </NavigationContainer>
         </Provider>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
