@@ -1,10 +1,12 @@
 import { FlatList, Image, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
-import { pictureSelector } from '../store/pictureSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPicture, pictureSelector } from '../store/pictureSlice';
 import PictureIcon from './PictureIcon';
 import Picture from '../models/Picture';
+import PictureGallery from './shared/PictureGallery';
+import { useEffect } from 'react';
 
-export default function PictureGallery() {
+export default function AllPictures() {
     // const pictures: Picture[] =  useSelector(pictureSelector);
     const pictures: Picture[] = [
         {
@@ -45,19 +47,14 @@ export default function PictureGallery() {
         },
     ];
 
-    return (
-        <FlatList
-            style={style.gallery}
-            renderItem={({ item, index }) => <PictureIcon picture={item} />}
-            data={pictures}
-            keyExtractor={(item) => item.uri}
-            numColumns={4}
-        />
-    );
-}
+    useEffect(() => {
+        addToSlice();
+    });
 
-const style = StyleSheet.create({
-    gallery: {
-        flex: 1,
-    },
-});
+    const dispatch = useDispatch();
+    function addToSlice() {
+        pictures.forEach((p) => dispatch(addPicture(p)));
+    }
+
+    return <PictureGallery pictures={pictures} />;
+}

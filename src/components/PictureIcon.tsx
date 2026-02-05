@@ -9,7 +9,7 @@ export default function PictureIcon(props: { picture: Picture }) {
     return (
         <TouchableOpacity
             onPress={() => {
-                navigation.navigate('Details', { picture: props.picture });
+                navigation.navigate('details', { picture: props.picture });
             }}
         >
             <Image source={require('../../assets/unnamed.jpg')} style={styles.icon} />

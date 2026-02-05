@@ -1,9 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { folderSelector } from "../store/folderSlice";
-import { Button, FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import Folder from "../models/Folder";
-import { addFolder } from "../store/folderSlice";
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { folderSelector } from '../store/folderSlice';
+import { Button, FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import Folder from '../models/Folder';
+import { addFolder } from '../store/folderSlice';
+import { useState } from 'react';
+import FolderIcon from './FolderIcon';
 
 export default function FolderList() {
     const folders: Folder[] = useSelector(folderSelector);
@@ -14,8 +15,8 @@ export default function FolderList() {
         if (folderName) {
             const newFolder: Folder = {
                 name: folderName,
-            }
-            dispatch(addFolder(newFolder))
+            };
+            dispatch(addFolder(newFolder));
         }
     }
 
@@ -34,22 +35,14 @@ export default function FolderList() {
                     onPress={addNewFolder}
                     disabled={!folderName}
                 />
-                {/*     onPress={addNewFolder} */}
-                {/*     disabled={!folderName} */}
-                {/* > */}
-                {/*     <Text */}
-                {/*         style={styles.button} */}
-                {/*     >Ajouter</Text> */}
-                {/* </Pressable> */}
             </View>
             <FlatList
-                renderItem={({ item }) => <View style={styles.item}><Text>{item.name}</Text></View>}
+                renderItem={({ item }) => <FolderIcon folder={item} />}
                 data={folders}
-                keyExtractor={item => item.name}
+                keyExtractor={(item) => item.name}
             />
-
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -68,12 +61,12 @@ const styles = StyleSheet.create({
     button: {
         fontSize: 20,
         fontWeight: 'bold',
-        width: '30%'
+        width: '30%',
     },
     item: {
         height: 50,
         backgroundColor: 'grey',
         marginBottom: 5,
         marginHorizontal: 5,
-    }
-})
+    },
+});

@@ -2,13 +2,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
+
 import { store } from './src/store/store';
 
 import Camera from './src/components/Camera';
-import PictureGallery from './src/components/PictureGallery';
+import AllPictures from './src/components/AllPictures';
 import FolderList from './src/components/FolderList';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PictureDetails from './src/components/PictureDetails';
+import FolderPictures from './src/components/FolderPictures';
 
 export default function App() {
     const Tab = createBottomTabNavigator();
@@ -18,7 +20,7 @@ export default function App() {
         return (
             <Tab.Navigator>
                 <Tab.Screen name="camera" component={Camera} />
-                <Tab.Screen name="gallery" component={PictureGallery} />
+                <Tab.Screen name="gallery" component={AllPictures} />
                 <Tab.Screen name="folder" component={FolderList} />
             </Tab.Navigator>
         );
@@ -28,8 +30,9 @@ export default function App() {
         <Provider store={store}>
             <NavigationContainer>
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="Tabs" component={BottomNav} />
-                    <Stack.Screen name="Details" component={PictureDetails} />
+                    <Stack.Screen name="tabs" component={BottomNav} />
+                    <Stack.Screen name="details" component={PictureDetails} />
+                    <Stack.Screen name="folderPictures" component={FolderPictures} />
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
