@@ -7,7 +7,6 @@ import { addPicture } from '../store/pictureSlice';
 export default function Camera() {
     const [facing, setFacing] = useState<CameraType>('back');
     const [permission, requestPermission] = useCameraPermissions();
-    const [uri, setUri] = useState('');
     const dispatch = useDispatch();
     const ref = useRef<CameraView>(null);
 
@@ -27,8 +26,14 @@ export default function Camera() {
     async function takePicture() {
         const photo = await ref.current?.takePictureAsync();
         if (photo?.uri) {
-            //TODO FORMAT DATA
-            dispatch(addPicture(photo));
+            dispatch(
+                addPicture({
+                    uri: photo.uri,
+                    width: photo.width,
+                    height: photo.height,
+                    format: photo.uri.split('.').pop() ?? 'jpg',
+                }),
+            );
         }
     }
 

@@ -1,26 +1,26 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./store";
-import Folder from "../models/Folder";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from './store';
+import Folder from '../models/Folder';
 
 interface FolderState {
-    value: Folder[]
+    value: Folder[];
 }
 
 const initialState: FolderState = {
     value: [],
-}
+};
 
 const folderSlice = createSlice({
-    name: "folder",
+    name: 'folder',
     initialState,
     reducers: {
         addFolder: (state, action: PayloadAction<Folder>) => {
-            if (!state.value.some(o => o.name === action.payload.name)) {
-                state.value.push(action.payload)
+            if (!state.value.some((o) => o.name === action.payload.name)) {
+                state.value.push(action.payload);
             }
         },
-    }
-})
+    },
+});
 
 export const { addFolder } = folderSlice.actions;
 export const folderSelector = (state: RootState) => state.folder.value;

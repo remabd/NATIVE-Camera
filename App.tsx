@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 
 import { store } from './src/store/store';
@@ -11,21 +10,22 @@ import FolderList from './src/components/FolderList';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PictureDetails from './src/components/PictureDetails';
 import FolderPictures from './src/components/FolderPictures';
+import type { RootStackParamList, TabParamList } from './src/navigation/types';
+
+const Tab = createBottomTabNavigator<TabParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function BottomNav() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="camera" component={Camera} />
+            <Tab.Screen name="gallery" component={AllPictures} />
+            <Tab.Screen name="folder" component={FolderList} />
+        </Tab.Navigator>
+    );
+}
 
 export default function App() {
-    const Tab = createBottomTabNavigator();
-    const Stack = createNativeStackNavigator();
-
-    function BottomNav() {
-        return (
-            <Tab.Navigator>
-                <Tab.Screen name="camera" component={Camera} />
-                <Tab.Screen name="gallery" component={AllPictures} />
-                <Tab.Screen name="folder" component={FolderList} />
-            </Tab.Navigator>
-        );
-    }
-
     return (
         <Provider store={store}>
             <NavigationContainer>
@@ -38,12 +38,3 @@ export default function App() {
         </Provider>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

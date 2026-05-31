@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { folderSelector } from '../store/folderSlice';
-import { Button, FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import Folder from '../models/Folder';
 import { addFolder } from '../store/folderSlice';
 import { useState } from 'react';
@@ -12,61 +12,87 @@ export default function FolderList() {
     const [folderName, setFolderName] = useState<string>('');
 
     function addNewFolder() {
-        if (folderName) {
-            const newFolder: Folder = {
-                name: folderName,
-            };
-            dispatch(addFolder(newFolder));
-        }
+        if (!folderName) return;
+        dispatch(addFolder({ name: folderName }));
+        setFolderName('');
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <View style={styles.row}>
                 <TextInput
                     style={styles.input}
                     value={folderName}
                     onChangeText={setFolderName}
                     placeholder="Nouveau dossier"
+                    placeholderTextColor="#999"
                 />
-                <Button
-                    title="Ajouter"
-                    color="#DAA520"
+                <Pressable
                     onPress={addNewFolder}
                     disabled={!folderName}
-                />
+                    style={({ pressed }) => [
+                        styles.button,
+                        !folderName && styles.buttonDisabled,
+                        pressed && folderName && styles.buttonPressed,
+                    ]}
+                >
+                    <Text style={styles.buttonText}>Ajouter</Text>
+                </Pressable>
             </View>
             <FlatList
                 renderItem={({ item }) => <FolderIcon folder={item} />}
                 data={folders}
                 keyExtractor={(item) => item.name}
+                ListEmptyComponent={
+                    <Text style={styles.empty}>Aucun dossier pour le moment</Text>
+                }
             />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: 40,
+        paddingHorizontal: 16,
+        backgroundColor: '#fff',
+    },
     row: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        margin: 5,
-        height: 50,
+        alignItems: 'center',
+        marginBottom: 16,
+        gap: 8,
     },
     input: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        backgroundColor: 'grey',
-        width: '70%',
+        flex: 1,
+        fontSize: 16,
+        backgroundColor: '#f3f3f3',
+        borderRadius: 10,
+        paddingHorizontal: 14,
+        paddingVertical: 10,
+        color: '#222',
     },
     button: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        width: '30%',
+        backgroundColor: '#DAA520',
+        paddingHorizontal: 18,
+        paddingVertical: 12,
+        borderRadius: 10,
     },
-    item: {
-        height: 50,
-        backgroundColor: 'grey',
-        marginBottom: 5,
-        marginHorizontal: 5,
+    buttonDisabled: {
+        backgroundColor: '#ccc',
+    },
+    buttonPressed: {
+        opacity: 0.7,
+    },
+    buttonText: {
+        color: '#fff',
+        fontWeight: '600',
+        fontSize: 15,
+    },
+    empty: {
+        textAlign: 'center',
+        color: '#999',
+        marginTop: 24,
     },
 });

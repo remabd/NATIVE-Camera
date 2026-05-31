@@ -17,7 +17,7 @@ const pictureSlice = createSlice({
         addPicture: (state, action: PayloadAction<Picture>) => {
             state.value.push(action.payload);
         },
-        assignFolder: (state, action: PayloadAction<Picture>) => {
+        assignToFolder: (state, action: PayloadAction<Picture>) => {
             const pic = state.value.find((p) => p.uri === action.payload.uri);
             if (pic) {
                 pic.folder = action.payload.folder;
@@ -26,6 +26,6 @@ const pictureSlice = createSlice({
     },
 });
 
-export const { addPicture, assignFolder } = pictureSlice.actions;
+export const { addPicture, assignToFolder } = pictureSlice.actions;
 export const pictureSelector = (state: RootState) => state.picture.value;
 export default pictureSlice.reducer;
